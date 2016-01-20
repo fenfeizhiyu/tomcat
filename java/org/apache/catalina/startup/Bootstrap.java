@@ -60,11 +60,12 @@ public final class Bootstrap {
     private static final File catalinaHomeFile;
 
     private static final Pattern PATH_PATTERN = Pattern.compile("(\".*?\")|(([^,])*)");
-
+    
+  
     static {
         // Will always be non-null
         String userDir = System.getProperty("user.dir");
-
+        
         // Home first
         String home = System.getProperty(Globals.CATALINA_HOME_PROP);
         File homeFile = null;
