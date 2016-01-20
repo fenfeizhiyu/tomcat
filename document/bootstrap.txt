@@ -1,0 +1,18 @@
+1.实例化bootstrap   
+2.初始化bootstrap-->初始化类加载器--->设置当前线程的类加载器，设置安全模块类加载器--->加载Catalina类，实例化
+   --->设置Catalina类的父类加载器为ClassLoader
+ 3.根据不同命令调用bootstrap的load方法，start方法,stop方法等。。
+
+
+ ---------------
+ catalina类
+
+ 1.start方法:  调用load方-->初始化Server-->调用Server的start方法--->注册shutDown Hook--->实例化LogManager对象
+    ---->进入等待，调用Server的await()方法------>退出等待调用stop方法
+
+ 2.load方法: 初始化临时目录----->初始化命名空间-------->new一个Digester xml解析器---->读取xml配置文件--->初始化Server
+
+
+Server 类------------>StandardServer
+
+1.await方法: 实例化一个ServerSocket 默认端口号8005 ----->ServerScoket监听accept 设置So超时10秒,获取socket的输入流

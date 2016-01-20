@@ -33,6 +33,7 @@ import org.apache.catalina.startup.ClassLoaderFactory.Repository;
 import org.apache.catalina.startup.ClassLoaderFactory.RepositoryType;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
+import org.apache.mylog.MLog;
 
 
 /**
@@ -66,14 +67,22 @@ public final class Bootstrap {
         // Will always be non-null
         String userDir = System.getProperty("user.dir");
         
+        MLog.writeLog(MLog.getString("Bootstrap","static69","user.dir",userDir));
+        
         // Home first
         String home = System.getProperty(Globals.CATALINA_HOME_PROP);
+        
+        MLog.writeLog(MLog.getString("Bootstrap","static72",Globals.CATALINA_HOME_PROP,home));
+        
         File homeFile = null;
 
         if (home != null) {
             File f = new File(home);
             try {
                 homeFile = f.getCanonicalFile();
+                
+                MLog.writeLog(MLog.getString("Bootstrap","static79",homeFile.getName(),homeFile.getPath()));
+                
             } catch (IOException ioe) {
                 homeFile = f.getAbsoluteFile();
             }
@@ -83,9 +92,14 @@ public final class Bootstrap {
             // First fall-back. See if current directory is a bin directory
             // in a normal Tomcat install
             File bootstrapJar = new File(userDir, "bootstrap.jar");
-
+            
+            MLog.writeLog(MLog.getString("Bootstrap","static96","bootstrapJar",bootstrapJar.getName(),bootstrapJar.getPath()));
+            
             if (bootstrapJar.exists()) {
                 File f = new File(userDir, "..");
+                
+                MLog.writeLog(MLog.getString("Bootstrap","static96","f",f.getName(),f.getPath()));
+                
                 try {
                     homeFile = f.getCanonicalFile();
                 } catch (IOException ioe) {
