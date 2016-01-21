@@ -56,12 +56,17 @@ public class FileParseTest {
 	}
 	
 	
-	public boolean checkBegin(String str)
+	private boolean checkBegin(String str)
 	{
 		if(str.contains("{"))
 			return true;
 		else
 			return false;
+	}
+	
+	private boolean checkMethodBegin(String str)
+	{
+		return false;
 	}
 
 }
