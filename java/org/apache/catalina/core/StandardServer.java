@@ -46,6 +46,7 @@ import org.apache.catalina.util.LifecycleMBeanBase;
 import org.apache.catalina.util.ServerInfo;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
+import org.apache.mylog.MLog;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.buf.StringCache;
 import org.apache.tomcat.util.res.StringManager;
@@ -71,7 +72,7 @@ public final class StandardServer extends LifecycleMBeanBase implements Server {
     public StandardServer() {
 
         super();
-
+        MLog.debug("75","StandardServer  构造函数被调用");
         globalNamingResources = new NamingResourcesImpl();
         globalNamingResources.setContainer(this);
 

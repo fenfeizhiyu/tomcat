@@ -64,5 +64,25 @@ public class MLog {
 		else 
 			return "";
 	}
+	
+	
+	public static void debug(String...strs)
+	{
+		String str;
+		if(strs.length>0)
+		{
+			StringBuilder sb=new StringBuilder();
+			for(String s:strs)
+			{
+				sb.append(s);
+				sb.append(" | ");
+			}
+			str=sb.toString();
+		}
+		else 
+			str="";
+		writeLog(str);
+		
+	}
 
 }

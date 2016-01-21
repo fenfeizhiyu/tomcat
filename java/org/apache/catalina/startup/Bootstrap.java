@@ -320,10 +320,14 @@ public final class Bootstrap {
         }
         Method method =
             catalinaDaemon.getClass().getMethod(methodName, paramTypes);
+        
+      //  MLog.debug("324","bootstrap.load",catalinaDaemon.getClass().getName(),methodName,paramTypes.getClass().getName());
+        
         if (log.isDebugEnabled())
             log.debug("Calling startup class " + method);
         method.invoke(catalinaDaemon, param);
-
+        
+        //MLog.debug("330",catalinaDaemon.getClass().getName(),"param type:"+param.getClass().getName(),param.length+"");
     }
 
 
@@ -363,7 +367,12 @@ public final class Bootstrap {
         if( catalinaDaemon==null ) init();
 
         Method method = catalinaDaemon.getClass().getMethod("start", (Class [] )null);
+        
+        MLog.writeLog(MLog.getString("bootStrap.start()",catalinaDaemon.getClass().getName()));
+        
         method.invoke(catalinaDaemon, (Object [])null);
+        
+        MLog.writeLog(MLog.getString("bootStrap.start()",catalinaDaemon.getClass().getName(),method.getName()+"方法被调用"));
 
     }
 
@@ -466,6 +475,9 @@ public final class Bootstrap {
         if (daemon == null) {
             // Don't set daemon until init() has completed
             Bootstrap bootstrap = new Bootstrap();
+            
+            MLog.debug("bootstrap.main","bootstrap实例化");
+            
             try {
                 bootstrap.init();
             } catch (Throwable t) {

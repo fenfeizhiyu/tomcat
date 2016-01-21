@@ -38,6 +38,7 @@ import org.apache.catalina.security.SecurityConfig;
 import org.apache.juli.ClassLoaderLogManager;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
+import org.apache.mylog.MLog;
 import org.apache.tomcat.util.ExceptionUtils;
 import org.apache.tomcat.util.digester.Digester;
 import org.apache.tomcat.util.digester.Rule;
@@ -500,13 +501,15 @@ public class Catalina {
      */
     public void load() {
 
+    	
         long t1 = System.nanoTime();
-
+        MLog.debug("Catalina.start  Server is null load begin",t1+"");
         initDirs();
 
         // Before digester - it may be needed
         initNaming();
-
+         
+        MLog.debug("Catalina.start 初始化目录，初始化命名空间");
         // Create and execute our Digester
         Digester digester = createStartDigester();
 
@@ -633,7 +636,10 @@ public class Catalina {
      */
     public void start() {
 
+    	MLog.debug("Catalina.start begin");
+    	
         if (getServer() == null) {
+        	MLog.debug("Catalina.start  Server is null");
             load();
         }
 
@@ -755,6 +761,9 @@ public class Catalina {
 
     protected void initDirs() {
         String temp = System.getProperty("java.io.tmpdir");
+        
+        MLog.debug("764","Catalina.initDirs","java.io.tmpdir",temp);
+        
         if (temp == null || (!(new File(temp)).isDirectory())) {
             log.error(sm.getString("embedded.notmp", temp));
         }
@@ -770,6 +779,8 @@ public class Catalina {
 
     protected void initNaming() {
         // Setting additional variables
+    	MLog.debug("781","catalina.initNaming","Setting additional variables","userNaming",useNaming+"");
+    	
         if (!useNaming) {
             log.info( "Catalina naming disabled");
             System.setProperty("catalina.useNaming", "false");

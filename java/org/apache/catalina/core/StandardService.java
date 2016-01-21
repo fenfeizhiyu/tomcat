@@ -37,6 +37,7 @@ import org.apache.catalina.mapper.MapperListener;
 import org.apache.catalina.util.LifecycleMBeanBase;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
+import org.apache.mylog.MLog;
 import org.apache.tomcat.util.res.StringManager;
 
 
@@ -226,7 +227,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
      */
     @Override
     public void addConnector(Connector connector) {
-
+    	MLog.debug("230","catalina.core.StandardService addConnector");
         synchronized (connectorsLock) {
             connector.setService(this);
             Connector results[] = new Connector[connectors.length + 1];
@@ -266,6 +267,8 @@ public class StandardService extends LifecycleMBeanBase implements Service {
      */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
 
+    	MLog.debug("StandardService addPropertyChangeListener 开始调用");
+    	
         support.addPropertyChangeListener(listener);
 
     }
@@ -359,6 +362,8 @@ public class StandardService extends LifecycleMBeanBase implements Service {
      */
     @Override
     public void addExecutor(Executor ex) {
+    	
+    	MLog.debug("364","StandardService  addExecutor");
         synchronized (executors) {
             if (!executors.contains(ex)) {
                 executors.add(ex);
@@ -545,6 +550,7 @@ public class StandardService extends LifecycleMBeanBase implements Service {
     @Override
     protected void initInternal() throws LifecycleException {
 
+    	MLog.debug("549","StandardService initInternal 初始化");
         super.initInternal();
 
         if (container != null) {
