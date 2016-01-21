@@ -68,5 +68,28 @@ public class FileParseTest {
 	{
 		return false;
 	}
+	
+	
+	private int checkString(String str)
+	{
+		
+		return 0;
+	}
+	
+	
+	private final static int begin_flag=1; //含有 {
+	
+	private final static  int end_flag=2;   //含有 }
+	
+	private final static int class_word=3;   //含有关键字  class
+	
+	private final static int method_begin=4;   //含有 (
+	
+	private final static int method_end=5;     //含有  )
+	
+	
+			
+	
+
 
 }
